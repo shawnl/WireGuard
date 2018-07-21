@@ -235,6 +235,7 @@ static void destruct(struct net_device *dev)
 	skb_queue_purge(&wg->incoming_handshakes);
 	free_percpu(dev->tstats);
 	free_percpu(wg->incoming_handshakes_worker);
+	pubkey_hashtable_cleanup(&wg->peer_hashtable);
 	if (wg->have_creating_net_ref)
 		put_net(wg->creating_net);
 	mutex_unlock(&wg->device_update_lock);
